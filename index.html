@@ -1,0 +1,863 @@
+<title>Younes Chakrouni</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap">
+<style>
+/* Layout : site « construit par des agents » — fond noir chaud, accents orange/rouge,
+cadres fil de fer colorés qui deviennent du vrai contenu. Thème sombre assumé. */
+:root{
+--bg:#0b0807; --surface:#15100e; --surface-2:#1d1613; --line:#2c221e;
+--fg:#f4ede9; --muted:#a59791; --dim:#6f625c;
+--accent:#ff4a1c; --accent-2:#ff2d2d; --ok:#4ade80;
+--display:"Archivo","Arial Narrow",Impact,sans-serif;
+--body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+--a1:#ff5c39; --a2:#ff4fa3; --a3:#39d0ff; --a4:#4ade80; --a5:#facc15; --a6:#a78bfa; --a7:#60a5fa;
+--maxw:1200px;
+color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
+padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+position:relative;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+background:radial-gradient(60% 50% at 85% -10%,rgba(255,60,20,.22),transparent 70%),
+radial-gradient(40% 40% at -10% 40%,rgba(255,45,45,.08),transparent 70%)}
+a{color:inherit}
+::selection{background:var(--accent);color:#120806}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.hl{color:var(--accent)}
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));
+padding:14px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));
+background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:24px}
+.logo{white-space:nowrap;display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-stretch:115%;letter-spacing:.06em;font-size:13px}
+.logo-mark{width:30px;height:30px;display:grid;place-items:center;border-radius:7px;background:var(--accent);color:#140805;font-size:13px;letter-spacing:0}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-size:14px}
+.nav-links a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;
+font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--surface);white-space:nowrap}
+.badge i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 7px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+@media (max-width:760px){.nav-links{display:none}.badge{margin-left:auto}}
+@media (max-width:480px){.nav .logo > span:last-child{display:none}}
+/* ---------- Headings ---------- */
+h1,h2,h3{font-family:var(--display);font-weight:850;font-stretch:96%;letter-spacing:-.045em;line-height:.92;margin:0;text-wrap:balance}
+h2{font-size:clamp(44px,7.4vw,96px)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--muted);margin-bottom:18px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent)}
+section{padding-block:clamp(72px,11vw,140px)}
+.sec-head{display:grid;gap:18px;margin-bottom:48px}
+.sec-head p{color:var(--muted);max-width:56ch;margin:0}
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(40px,7vw,96px) clamp(56px,8vw,110px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.hero-copy{min-width:0;display:grid;gap:26px}
+.hero h1{font-size:clamp(64px,10.5vw,148px)}
+.hero h1 > span{display:block}
+.lead{font-size:clamp(16px,1.5vw,18.5px);color:var(--muted);max-width:50ch;margin:0}
+.lead b{color:var(--fg);font-weight:600}
+.status{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--fg)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;
+text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body);transition:transform .2s,background .2s,border-color .2s}
+.btn-fill{background:var(--accent);color:#170905}
+.btn-fill:hover{background:#ff6a3f;transform:translateY(-2px)}
+.btn-line{border-color:#3a2d28;color:var(--fg);background:transparent}
+.btn-line:hover{border-color:var(--fg);transform:translateY(-2px)}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+/* 3D packs */
+.stage{position:relative;height:500px;perspective:1500px;min-width:0}
+.stage-in{position:absolute;left:50%;top:0;width:600px;height:500px;margin-left:-300px;transform-origin:50% 0;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.box{position:absolute;width:200px;height:280px;transform-style:preserve-3d;animation:float 6s ease-in-out infinite}
+.box .rot{position:absolute;inset:0;transform-style:preserve-3d}
+.face{position:absolute;inset:0;border-radius:6px;overflow:hidden;backface-visibility:hidden}
+.side{position:absolute;top:0;height:100%;width:44px;right:100%;transform-origin:right center;transform:rotateY(-90deg);border-radius:6px 0 0 6px;
+writing-mode:vertical-rl;transform-box:border-box;display:flex;align-items:center;justify-content:space-between;padding:14px 0;
+font-family:var(--display);font-weight:800;font-stretch:120%;font-size:12px;letter-spacing:.14em}
+.front{display:flex;flex-direction:column;justify-content:space-between;padding:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.front .top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;opacity:.9}
+.front .big{font-family:var(--display);font-weight:900;font-stretch:90%;font-size:46px;letter-spacing:-.04em;line-height:.9}
+.front .spec{font-family:var(--mono);font-size:10.5px;opacity:.85;letter-spacing:.04em}
+.front .kind{font-family:var(--display);font-weight:800;font-stretch:118%;font-size:12px;letter-spacing:.12em;margin-top:6px}
+.b1{left:10px;top:90px;z-index:1;animation-delay:-1s}
+.b1 .rot{transform:rotateY(26deg) rotateX(4deg)}
+.b1 .front{background:radial-gradient(circle,rgba(0,0,0,.28) 3.2px,transparent 3.8px) 0 0/18px 18px,linear-gradient(155deg,#ff7a3a,#e2321a 60%,#a8170b);color:#1b0805}
+.b1 .side{background:linear-gradient(#b52410,#7d1206);color:#ffd2c2}
+.b2{left:205px;top:30px;z-index:2;animation-delay:-3s}
+.b2 .rot{transform:rotateY(18deg) rotateX(3deg) translateZ(60px)}
+.b2 .front{background:repeating-radial-gradient(circle at 70% 75%,rgba(255,255,255,.16) 0 1px,transparent 1px 16px),linear-gradient(160deg,#36c3ff,#1557d6 55%,#0b2a7a);color:#f0f8ff}
+.b2 .side{background:linear-gradient(#0f3f9e,#08245d);color:#bfe7ff}
+.b3{left:392px;top:150px;z-index:1;animation-delay:-5s}
+.b3 .rot{transform:rotateY(12deg) rotateX(4deg)}
+.b3 .front{background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 14px),linear-gradient(160deg,#2b2320,#141010);color:#ffd18a;box-shadow:inset 0 0 0 1px rgba(255,190,90,.35)}
+.b3 .side{background:linear-gradient(#211a17,#0e0b0a);color:#ffb54a}
+.term{font-family:var(--mono);font-size:10px;line-height:1.7;color:#ffcf8a;opacity:.9}
+.term .g{color:#7ee2a0}
+@keyframes float{50%{translate:0 -12px}}
+.tag-float{position:absolute;font-family:var(--mono);font-size:10.5px;color:var(--muted);padding:4px 8px;border:1px dashed #4a3a33;border-radius:4px;background:rgba(11,8,7,.7);white-space:nowrap}
+@media (max-width:1100px){.stage-in{scale:.88}.stage{height:450px}}
+@media (max-width:900px){.stage{height:450px}.stage-in{scale:.88}}
+@media (max-width:620px){.stage{height:300px}.stage-in{scale:.58}}
+/* ---------- Domaines ---------- */
+.domains{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dom{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;gap:14px;
+align-content:start;transition:border-color .3s,transform .3s;min-width:0}
+.dom:hover{border-color:var(--c);transform:translateY(-4px)}
+.dom:hover::after{opacity:1}
+.dom::after{content:"";position:absolute;inset:-1px;border-radius:14px;pointer-events:none;opacity:0;transition:opacity .3s;
+box-shadow:0 0 0 1px var(--c),0 18px 60px -20px var(--c)}
+.dom .k{color:var(--c)}
+.dom h3{font-size:30px;letter-spacing:-.03em}
+.metric{font-family:var(--display);font-weight:850;font-size:54px;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.metric small{font-size:20px;letter-spacing:0;color:var(--muted);margin-left:6px;font-weight:600}
+.metric-cap{font-size:13.5px;color:var(--muted);margin-top:-6px}
+.dom p{margin:0;color:#cfc3bd;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:11.5px;padding:4px 9px;border-radius:999px;border:1px solid #382b26;color:#d9ccc6;background:var(--surface-2)}
+@media (max-width:900px){.domains{grid-template-columns:1fr}}
+/* ---------- Projets (bento) ---------- */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.proj{grid-column:span 2;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+text-align:left;color:inherit;font:inherit;cursor:pointer;padding:0;transition:border-color .3s,transform .3s;min-width:0}
+.proj:hover{border-color:#5a443b;transform:translateY(-4px)}
+.proj.w4{grid-column:span 4}.proj.w3{grid-column:span 3}
+.vis{position:relative;height:190px;background:#0e0a09;border-bottom:1px solid var(--line);overflow:hidden}
+.meta{padding:20px 22px 22px;display:grid;gap:8px}
+.meta .mono{color:var(--dim);font-size:11px}
+.meta h3{font-size:25px;letter-spacing:-.03em;line-height:1}
+.meta p{margin:0;color:var(--muted);font-size:14.5px}
+.more{font-size:13px;color:var(--accent);font-weight:600;margin-top:4px}
+@media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.proj,.proj.w3{grid-column:span 1}.proj.w4{grid-column:span 2}}
+@media (max-width:600px){.bento{grid-template-columns:1fr}.proj,.proj.w3,.proj.w4{grid-column:span 1}}
+/* visuels */
+.wave{position:absolute;inset:0}
+.wave svg{position:absolute;left:0;top:0;width:200%;height:100%;animation:slide 7s linear infinite}
+@keyframes slide{to{transform:translateX(-50%)}}
+.vis-lab{position:absolute;font-family:var(--mono);font-size:10.5px;color:var(--muted);background:rgba(14,10,9,.8);padding:3px 7px;border-radius:4px;border:1px solid var(--line)}
+.nodes{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-around;padding:0 14px}
+.node{font-family:var(--mono);font-size:10.5px;padding:8px 9px;border:1px solid #4a3a33;border-radius:6px;background:var(--surface-2);text-align:center;z-index:1}
+.node b{display:block;color:var(--fg);font-weight:600;font-size:11.5px}
+.node span{color:var(--dim)}
+.link{position:absolute;top:50%;height:1px;background:repeating-linear-gradient(90deg,#5a463d 0 5px,transparent 5px 9px)}
+.pkt{position:absolute;top:calc(50% - 3px);width:6px;height:6px;border-radius:50%;background:var(--a3);box-shadow:0 0 10px var(--a3);animation:pkt 1.4s linear infinite}
+@keyframes pkt{from{left:var(--x0)}to{left:var(--x1)}}
+.radar{position:absolute;width:230px;height:230px;left:50%;top:50%;translate:-50% -50%;border-radius:50%;
+background:repeating-radial-gradient(circle,transparent 0 22px,rgba(57,208,255,.18) 22px 23px)}
+.radar::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(57,208,255,.45),transparent 22%);animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.radar i{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--a3)}
+.bus{position:absolute;left:0;right:0;height:2px}
+.bus.h{top:42%;background:var(--a5)}.bus.l{top:62%;background:var(--a6)}
+.frame{position:absolute;top:calc(42% - 11px);height:22px;padding:0 8px;display:flex;align-items:center;font-family:var(--mono);font-size:10px;
+background:#2a2112;border:1px solid var(--a5);border-radius:4px;color:var(--a5);animation:frame 4s linear infinite;white-space:nowrap}
+@keyframes frame{from{left:-120px}to{left:110%}}
+.tbl{position:absolute;inset:18px;font-family:var(--mono);font-size:11px;display:grid;align-content:start;gap:4px}
+.tbl div{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:8px;padding:5px 8px;border-radius:4px;background:var(--surface-2);color:var(--muted)}
+.tbl div:first-child{background:transparent;color:var(--dim)}
+.tbl .fix{background:rgba(74,222,128,.1);color:var(--ok);outline:1px solid rgba(74,222,128,.35)}
+.shell{position:absolute;inset:16px;font-family:var(--mono);font-size:11.5px;line-height:1.85;color:var(--muted)}
+.shell .p{color:var(--accent)}.shell .o{color:var(--ok)}
+.cursor-blink{display:inline-block;width:7px;height:13px;background:var(--fg);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.podium{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:10px;padding-bottom:0}
+.podium div{width:64px;border-radius:6px 6px 0 0;display:grid;place-items:start center;padding-top:8px;font-family:var(--display);font-weight:850;font-size:22px}
+.podium .p1{height:120px;background:#2a1f1b;color:var(--dim)}
+.podium .p2{height:92px;background:#231a17;color:var(--dim)}
+.podium .p3{height:70px;background:var(--accent);color:#170905}
+.stars{position:absolute;inset:0;background:radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 45%,#ffd18a,transparent),radial-gradient(1px 1px at 40% 15%,#fff,transparent),radial-gradient(1px 1px at 10% 55%,#fff,transparent);opacity:.6}
+/* ---------- Parcours ---------- */
+.about{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start}
+.photo{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#e9e6e3;max-width:100%}
+.photo img{display:block;width:100%;height:auto;filter:saturate(.9) contrast(1.03)}
+.photo-wrap{position:relative;padding:10px;border:1px dashed #4a3a33;border-radius:18px;min-width:0}
+.handle{position:absolute;width:8px;height:8px;background:var(--accent);border-radius:2px}
+.about-copy{display:grid;gap:22px;min-width:0}
+.about-copy p{margin:0;color:#d4c8c2;font-size:17px;max-width:60ch}
+.tl{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.tl-col{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:4px;align-content:start;min-width:0}
+.tl-col > .mono{color:var(--accent);margin-bottom:10px}
+.tl-item{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.tl-item:first-of-type{border-top:0;padding-top:4px}
+.tl-item time{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.tl-item b{display:block;font-weight:600;font-size:15.5px}
+.tl-item span{display:block;color:var(--muted);font-size:14px}
+.tl-item ul{margin:8px 0 0;padding-left:16px;color:#cbbfb9;font-size:14px}
+.tl-item li{margin:3px 0}
+@media (max-width:900px){.about{grid-template-columns:1fr}.photo-wrap{max-width:260px}.tl{grid-template-columns:1fr}}
+@media (max-width:480px){.tl-item{grid-template-columns:1fr;gap:4px}}
+/* ---------- Compétences ---------- */
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.sk{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:14px;align-content:start;min-width:0}
+.sk h3{font-size:22px;letter-spacing:-.02em;font-stretch:100%}
+.sk .mono{color:var(--c)}
+.extra{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.extra .sk p{margin:0;color:#cfc3bd;font-size:14.5px}
+.lang{display:grid;gap:8px;font-size:14.5px}
+.lang div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.lang span{color:var(--muted)}
+@media (max-width:900px){.skills,.extra{grid-template-columns:1fr}}
+/* ---------- Contact ---------- */
+.contact{display:grid;place-items:center}
+.card-c{width:100%;max-width:760px;background:linear-gradient(180deg,var(--surface-2),var(--surface));border:1px solid var(--line);border-radius:20px;
+padding:clamp(28px,5vw,52px);display:grid;gap:22px;text-align:center;justify-items:center;position:relative}
+.card-c h2{font-size:clamp(42px,6.4vw,80px)}
+.card-c > p{margin:0;color:var(--muted);max-width:52ch}
+.copyrow{display:flex;gap:8px;width:100%;max-width:520px;flex-wrap:wrap;justify-content:center}
+.field{flex:1 1 260px;display:flex;align-items:center;padding:0 16px;height:50px;border:1px solid #3a2d28;border-radius:999px;background:var(--bg);
+font-family:var(--mono);font-size:14px;user-select:all;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.contact-meta{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;font-size:14px;color:var(--muted)}
+.contact-meta b{color:var(--fg);font-weight:600;user-select:all}
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding-block:48px 40px}
+.foot{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px}
+.foot h4{margin:0 0 12px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px}
+.foot a{text-decoration:none;color:var(--muted)}.foot a:hover{color:var(--fg)}
+.foot p{color:var(--muted);font-size:14px;margin:12px 0 0;max-width:34ch}
+.legal{max-width:var(--maxw);margin:40px auto 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;color:var(--dim);font-size:13px}
+@media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}}
+/* ---------- Modale ---------- */
+dialog{width:min(680px,calc(100vw - 32px));max-height:calc(100dvh - 48px);border:1px solid #3a2d28;border-radius:18px;background:var(--surface);color:var(--fg);padding:0;overflow:auto}
+dialog::backdrop{background:rgba(5,3,2,.72);backdrop-filter:blur(6px)}
+.m-in{padding:30px;display:grid;gap:16px}
+.m-in h3{font-size:clamp(30px,5vw,42px)}
+.m-in .mono{color:var(--accent)}
+.m-in p{margin:0;color:#d4c8c2}
+.m-in ul{margin:0;padding-left:18px;color:#d4c8c2;display:grid;gap:6px}
+.figs{display:flex;flex-wrap:wrap;gap:10px}
+.fig{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--bg)}
+.fig b{display:block;font-family:var(--display);font-size:26px;font-weight:850;letter-spacing:-.03em;line-height:1.1}
+.fig span{font-size:12.5px;color:var(--muted)}
+.m-close{position:sticky;top:0;float:right;margin:12px 12px 0 0;width:38px;height:38px;border-radius:50%;border:1px solid #3a2d28;background:var(--surface-2);color:var(--fg);font-size:18px;cursor:pointer}
+/* ---------- Construction par agents ---------- */
+[data-build] > *{transition:opacity .7s ease,filter .7s ease,translate .7s cubic-bezier(.2,.7,.2,1)}
+[data-build].is-wire > *{opacity:0;filter:blur(10px);translate:0 10px}
+#wires{position:absolute;left:0;top:0;width:100%;height:0;overflow:hidden;pointer-events:none;z-index:40}
+#wires svg{position:absolute;overflow:visible}
+#wires .rect{fill:none;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)}
+#wires .guide{stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;opacity:.35;transition:stroke-dashoffset .9s ease}
+#wires .xbox{stroke-width:1;opacity:.25}
+#wires .hdl{stroke:none}
+#wires text{font-family:var(--mono);font-size:10px;letter-spacing:.04em}
+#wires svg.go .rect,#wires svg.go .guide{stroke-dashoffset:0}
+#wires svg.fade{opacity:0;transition:opacity .6s ease}
+#agents{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}
+.agent{position:absolute;left:0;top:0;will-change:transform;transition:opacity .4s}
+.agent svg{display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+.agent span{position:absolute;left:13px;top:17px;font-family:var(--mono);font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:999px;color:#120806;white-space:nowrap}
+#seed{position:fixed;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;box-shadow:0 0 22px 6px rgba(255,90,40,.7);z-index:71;
+opacity:0;scale:.2;transition:opacity .4s,scale .5s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+#seed.on{opacity:1;scale:1}
+#skip{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:72;
+font-family:var(--mono);font-size:12px;padding:9px 14px;border-radius:999px;border:1px solid #3a2d28;background:rgba(21,16,14,.9);color:var(--fg);cursor:pointer}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important}
+html{scroll-behavior:auto}
+}
+/* ================= V2 : couche dynamique ================= */
+/* fond circuit imprimé */
+.hero{position:relative;isolation:isolate}
+#pcb{position:absolute;top:-80px;left:calc(50% - 50vw);width:100vw;height:calc(100% + 80px);z-index:-1;display:block;
+-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
+/* titres lettre par lettre */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.ch{display:inline-block}
+.play .ch{animation:chUp .95s cubic-bezier(.2,.85,.2,1) both;animation-delay:calc(var(--i) * 32ms)}
+@keyframes chUp{from{transform:translateY(105%) rotate(8deg)}}
+.glitch{animation:glitch 5s infinite}
+@keyframes glitch{0%,90%,100%{text-shadow:none}91%{text-shadow:-4px 0 #39d0ff,4px 0 #ff4fa3}93%{text-shadow:3px 0 #39d0ff,-3px 0 #facc15}95%{text-shadow:-2px 0 #ff4fa3,2px 0 #39d0ff}}
+.rot-line{font-family:var(--mono);font-size:clamp(14px,1.5vw,17px);color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rot-line b{color:var(--fg);font-weight:500;background:linear-gradient(90deg,rgba(255,74,28,.18),transparent);padding:2px 8px;border-left:2px solid var(--accent)}
+.caret{width:9px;height:1.1em;background:var(--accent);animation:blink 1s steps(1) infinite}
+/* bandeau défilant */
+.marquee{margin-inline:calc(50% - 50vw);overflow:hidden;padding-block:40px 10px;position:relative}
+.mq{display:flex;white-space:nowrap;will-change:transform}
+.mq span{font-family:var(--display);font-weight:900;font-stretch:110%;font-size:clamp(34px,6vw,76px);letter-spacing:-.03em;line-height:1;padding:0 .35em;display:inline-flex;align-items:center;gap:.7em}
+.mq span::after{content:"✦";font-size:.45em;color:currentColor;opacity:.8}
+.band{padding:14px 0}
+.band.a{background:var(--accent);color:#140805;transform:rotate(-2deg);box-shadow:0 20px 60px -20px rgba(255,74,28,.6);position:relative;z-index:2}
+.band.b{transform:rotate(1.6deg);margin-top:-14px;background:var(--bg);border-block:1px solid var(--line)}
+.band.b span{color:transparent;-webkit-text-stroke:1.2px #6f564c}
+.band.b span::after{color:var(--accent);-webkit-text-stroke:0}
+/* projecteur + inclinaison des cartes */
+.dom,.proj,.sk,.tl-col{background:radial-gradient(420px circle at var(--mx,-999px) var(--my,-999px),rgba(255,90,40,.13),transparent 45%),var(--surface)}
+.dom,.proj{transform-style:preserve-3d;will-change:transform}
+.proj .vis{transition:filter .4s}
+.proj:hover .vis{filter:saturate(1.3) brightness(1.15)}
+/* barre de progression */
+#prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--accent),#ff4fa3,#39d0ff);transform-origin:0 50%;transform:scaleX(0)}
+/* parallaxe des packs */
+.b1{transform:translate(calc(var(--sp,0) * -110px),calc(var(--sp,0) * 40px)) rotate(calc(var(--sp,0) * -10deg))}
+.b2{transform:translateY(calc(var(--sp,0) * -90px)) scale(calc(1 + var(--sp,0) * .08))}
+.b3{transform:translate(calc(var(--sp,0) * 110px),calc(var(--sp,0) * 60px)) rotate(calc(var(--sp,0) * 10deg))}
+/* bordure animée du contact */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.card-c::before{content:"";position:absolute;inset:-1px;border-radius:21px;padding:1.5px;pointer-events:none;
+background:conic-gradient(from var(--ang),transparent 0 55%,var(--accent) 70%,#ff4fa3 80%,#39d0ff 90%,transparent);
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:ang 5s linear infinite}
+@keyframes ang{to{--ang:360deg}}
+.card-c{box-shadow:0 40px 120px -40px rgba(255,74,28,.35)}
+/* nom géant du footer */
+.giant{max-width:var(--maxw);margin:36px auto 0;font-family:var(--display);font-weight:900;font-stretch:100%;font-size:clamp(56px,15.5vw,210px);letter-spacing:-.05em;line-height:.8;
+text-align:center;color:transparent;-webkit-text-stroke:1px #3a2d28;user-select:none;
+background:radial-gradient(260px circle at var(--gx,50%) var(--gy,120%),var(--accent),rgba(255,74,28,.0) 70%);-webkit-background-clip:text;background-clip:text}
+/* curseur personnalisé */
+#cur,#cdot{position:fixed;left:0;top:0;pointer-events:none;z-index:90;border-radius:50%}
+#cur{width:36px;height:36px;margin:-18px 0 0 -18px;border:1.5px solid rgba(255,255,255,.55);display:grid;place-items:center;
+transition:width .25s,height .25s,margin .25s,background .25s,border-color .25s;font-family:var(--mono);font-size:11px;font-weight:600;color:#140805}
+#cur span{opacity:0;transition:opacity .2s}
+#cur.big{width:64px;height:64px;margin:-32px 0 0 -32px;border-color:var(--accent);background:rgba(255,74,28,.12)}
+#cur.view{width:84px;height:84px;margin:-42px 0 0 -42px;background:var(--accent);border-color:var(--accent)}
+#cur.view span{opacity:1}
+#cdot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--accent)}
+@media (pointer:coarse){#cur,#cdot{display:none}}
+/* grain */
+.grain{position:fixed;inset:-50%;pointer-events:none;z-index:45;opacity:.06;animation:grain 1s steps(4) infinite;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+/* intro : boot */
+#boot{position:fixed;left:50%;top:50%;translate:-50% -50%;z-index:72;font-family:var(--mono);font-size:13px;line-height:1.9;color:var(--muted);
+pointer-events:none;width:min(420px,calc(100vw - 40px));transition:opacity .4s}
+#boot .ok{color:var(--ok)}#boot .p{color:var(--accent)}
+.shock{position:fixed;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:2px solid var(--accent);z-index:71;pointer-events:none;
+animation:shock 1s cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes shock{to{transform:scale(70);opacity:0;border-width:.3px}}
+@media (prefers-reduced-motion:reduce){.grain,#cur,#cdot{display:none}}
+</style>
+<div id="wires"></div>
+<div id="agents" aria-hidden="true"></div>
+<div id="seed" aria-hidden="true"></div>
+<div id="boot" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"><span>Ouvrir</span></div><div id="cdot" aria-hidden="true"></div>
+<nav class="nav" aria-label="Navigation principale">
+<div class="nav-in" data-build data-name="nav">
+<a class="logo" href="#top"><span class="logo-mark">YC</span><span>YOUNES CHAKROUNI</span></a>
+<div class="nav-links"><a href="#domaines">Domaines</a><a href="#projets">Projets</a><a href="#parcours">Parcours</a><a href="#competences">Compétences</a><a href="#contact">Contact</a></div>
+<span class="badge" id="badge"><i></i><span id="badge-t">Disponible · stage 2027</span></span>
+</div>
+<div id="prog"></div>
+</nav>
+<main id="top">
+<section class="hero wrap" id="hero">
+<canvas id="pcb" aria-hidden="true"></canvas>
+<div class="hero-grid">
+<div class="hero-copy" data-build data-name="hero.copy">
+<div class="mono eyebrow" style="margin:0">Élève ingénieur · ENIB · Brest</div>
+<h1><span>Du code</span><span>au <span class="hl glitch" style="display:inline">robot.</span></span></h1>
+<div class="rot-line"><span>&gt; je construis</span><b id="rot">des robots autonomes</b><i class="caret"></i></div>
+<p class="lead">Je suis <b>Younes Chakrouni</b>, en 2e année du cycle ingénieur à l'ENIB. Je programme des cartes STM32, des robots sous ROS2 et les applications Python qui les pilotent.</p>
+<div class="status"><i></i>Disponible pour un stage de 6 mois dès fin février 2027</div>
+<div class="cta"><a class="btn btn-fill" href="#projets">Voir les projets →</a><a class="btn btn-line" href="#contact">Me contacter</a></div>
+</div>
+<div class="stage" id="stage" data-build data-name="hero.packs">
+<div class="stage-in" id="stage-in">
+<div class="box b1"><div class="rot">
+<div class="side">EMBARQUÉ <span>01</span></div>
+<div class="face front"><div class="top"><span>YC</span><span>PACK 01</span></div>
+<div><div class="big">STM32</div><div class="kind">SYSTÈMES EMBARQUÉS</div></div>
+<div class="spec">C · FreeRTOS · CAN · I2C</div></div>
+</div></div>
+<div class="box b2"><div class="rot">
+<div class="side">ROBOTIQUE <span>02</span></div>
+<div class="face front"><div class="top"><span>YC</span><span>PACK 02</span></div>
+<div><div class="big">ROS2</div><div class="kind">ROBOTIQUE MOBILE</div></div>
+<div class="spec">micro-ROS · LiDAR · Gazebo</div></div>
+</div></div>
+<div class="box b3"><div class="rot">
+<div class="side">LOGICIEL <span>03</span></div>
+<div class="face front"><div class="top"><span>YC</span><span>PACK 03</span></div>
+<div class="term">$ pytest -q<br><span class="g">63 passed</span><br>$ flask run<br>* Running on :5000</div>
+<div><div class="big">Python</div><div class="kind">LOGICIEL &amp; WEB</div><div class="spec" style="margin-top:8px">Flask · PyQt5 · SQL</div></div></div>
+</div></div>
+<span class="tag-float" style="left:4%;top:28px">pack.embarque · 200×280</span>
+<span class="tag-float" style="right:2%;bottom:30px">3 domaines · 1 ingénieur</span>
+</div>
+</div>
+</div>
+</section>
+<div class="marquee" aria-hidden="true">
+<div class="band a"><div class="mq" data-speed="0.7"><span>STM32</span><span>ROS2</span><span>FreeRTOS</span><span>Python</span><span>micro-ROS</span><span>Flask</span><span>CAN 500 kbit/s</span><span>LiDAR</span><span>Raspberry Pi</span><span>pytest</span></div></div>
+<div class="band b"><div class="mq" data-speed="-0.5"><span>Embarqué</span><span>Robotique</span><span>Logiciel</span><span>Temps réel</span><span>IoT</span><span>Capteurs</span><span>Scrum</span><span>Git</span></div></div>
+</div>
+<section class="wrap" id="domaines">
+<div class="sec-head" data-build data-name="domaines.head">
+<div class="mono eyebrow">Les domaines</div>
+<h2>Fait pour le <span class="hl">terrain.</span></h2>
+<p>Trois domaines que je relie dans chaque projet : la carte électronique, le robot et le logiciel qui les supervise.</p>
+</div>
+<div class="domains" data-build data-name="domaines.cards">
+<article class="dom" style="--c:var(--a1)">
+<div class="mono k">01 · Embarqué</div>
+<h3>Systèmes embarqués</h3>
+<div><div class="metric"><span class="num" data-to="500">500</span><small>kbit/s</small></div><div class="metric-cap">Bus CAN entre cartes STM32</div></div>
+<p>Programmation en C sur STM32, lecture de capteurs en I2C, liaisons UART et Zigbee, tâches temps réel sous FreeRTOS.</p>
+<div class="chips"><span class="chip">C</span><span class="chip">STM32</span><span class="chip">FreeRTOS</span><span class="chip">CAN</span><span class="chip">I2C</span><span class="chip">UART</span></div>
+</article>
+<article class="dom" style="--c:var(--a3)">
+<div class="mono k">02 · Robotique</div>
+<h3>Robotique mobile</h3>
+<div><div class="metric"><span class="num" data-to="5">5</span><small>ms</small></div><div class="metric-cap">Période d'acquisition de la vitesse, correcteur PI</div></div>
+<p>Architectures ROS2 et micro-ROS entre PC Linux, Raspberry Pi et STM32. Navigation autonome au LiDAR, simulation Gazebo.</p>
+<div class="chips"><span class="chip">ROS2</span><span class="chip">micro-ROS</span><span class="chip">Raspberry Pi</span><span class="chip">LiDAR</span><span class="chip">Gazebo</span></div>
+</article>
+<article class="dom" style="--c:var(--a5)">
+<div class="mono k">03 · Logiciel</div>
+<h3>Logiciel &amp; web</h3>
+<div><div class="metric"><span class="num" data-to="63">63</span><small>tests</small></div><div class="metric-cap">pytest écrits sur deux projets ENIB</div></div>
+<p>Applications Python temps réel, API REST Flask, interfaces PyQt5 et bases SQL. Le code est testé, versionné avec Git et livré en Scrum.</p>
+<div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">PyQt5</span><span class="chip">SQL</span><span class="chip">pytest</span><span class="chip">Git</span></div>
+</article>
+</div>
+</section>
+<section class="wrap" id="projets">
+<div class="sec-head" data-build data-name="projets.head">
+<div class="mono eyebrow">Projets</div>
+<h2>Voir le <span class="hl">travail.</span></h2>
+<p>Projets menés à l'ENIB et en DUT. Cliquez sur une carte pour le détail technique.</p>
+</div>
+<div class="bento" data-build data-name="projets.grid">
+<button class="proj w4" data-p="bma">
+<div class="vis"><div class="wave" id="wave"></div><span class="vis-lab" style="left:12px;top:12px">BMA400 · ax ay az</span><span class="vis-lab" style="right:12px;bottom:12px">I2C → STM32 → UART/Zigbee → Python</span></div>
+<div class="meta"><span class="mono">ENIB · STM32 · Python</span><h3>Supervision d'accélération BMA400</h3><p>Capteur lu en I2C par une STM32, données envoyées en UART ou Zigbee vers une application Python temps réel.</p><span class="more">Voir le détail →</span></div>
+</button>
+<button class="proj" data-p="ros">
+<div class="vis"><div class="nodes" id="nodes"><div class="node"><b>PC</b><span>Linux</span></div><div class="node"><b>RPi</b><span>ROS2</span></div><div class="node"><b>STM32</b><span>µROS</span></div></div></div>
+<div class="meta"><span class="mono">ENIB · ROS2 · FreeRTOS</span><h3>Robot mobile ROS2</h3><p>Vitesse acquise toutes les 5 ms, asservie par un correcteur PI.</p><span class="more">Voir le détail →</span></div>
+</button>
+<button class="proj" data-p="voice">
+<div class="vis"><div class="radar"><i style="left:30%;top:24%"></i><i style="left:72%;top:38%"></i><i style="left:58%;top:76%"></i><i style="left:20%;top:62%"></i><i style="left:44%;top:12%"></i></div><span class="vis-lab" style="left:12px;bottom:12px">LiDAR · /scan</span></div>
+<div class="meta"><span class="mono">DUT · ROS2 · LiDAR</span><h3>Robot à commande vocale</h3><p>Commandes vocales en darija et navigation autonome.</p><span class="more">Voir le détail →</span></div>
+</button>
+<button class="proj" data-p="can">
+<div class="vis"><div class="bus h"></div><div class="bus l"></div>
+<div class="frame">ID 0x101 · MPU9250</div><div class="frame" style="animation-delay:-2s">ID 0x102 · gyro</div>
+<span class="vis-lab" style="left:12px;top:12px">CAN_H / CAN_L</span><span class="vis-lab" style="right:12px;bottom:12px">500 kbit/s</span></div>
+<div class="meta"><span class="mono">ENIB · C · CAN</span><h3>Réseau de capteurs CAN</h3><p>Centrales MPU9250 sur STM32, réception des trames en Python.</p><span class="more">Voir le détail →</span></div>
+</button>
+<button class="proj" data-p="sql">
+<div class="vis"><div class="tbl"><div><span>table</span><span>trigger</span><span>test</span></div><div><span>users</span><span>on_insert</span><span>ok</span></div><div><span>posts</span><span>on_delete</span><span>ok</span></div><div class="fix"><span>followers</span><span>count++</span><span>corrigé</span></div><div><span>likes</span><span>on_insert</span><span>ok</span></div></div></div>
+<div class="meta"><span class="mono">ENIB · SQLite · pytest</span><h3>BDD d'un réseau social</h3><p>Triggers, vues et index. 21 tests pytest, dont un qui a révélé un bug de compteur.</p><span class="more">Voir le détail →</span></div>
+</button>
+<button class="proj w3" data-p="net">
+<div class="vis"><div class="shell"><span class="p">$</span> wds deploy --boot pxe<br><span class="o">✓ 12 postes Windows déployés</span><br><span class="p">$</span> ftps status<br><span class="o">✓ TLS actif · port 21</span><br><span class="p">$</span> crsctl stat res -t<br><span class="o">✓ oracle rac · node1 node2 ONLINE</span> <span class="cursor-blink"></span></div></div>
+<div class="meta"><span class="mono">DUT · Réseaux &amp; systèmes</span><h3>Infrastructure réseau</h3><p>Déploiement WDS/PXE, serveur FTP sécurisé en TLS, cluster Oracle RAC.</p><span class="more">Voir le détail →</span></div>
+</button>
+<button class="proj w3" data-p="space">
+<div class="vis"><div class="stars"></div><div class="podium"><div class="p2">2</div><div class="p1">1</div><div class="p3">3</div></div></div>
+<div class="meta"><span class="mono">Hackathon · Cybersécurité</span><h3>Act In Space · 3e place</h3><p>Hackathon sur la cybersécurité des satellites, terminé sur le podium.</p><span class="more">Voir le détail →</span></div>
+</button>
+</div>
+</section>
+<section class="wrap" id="parcours">
+<div class="about" data-build data-name="parcours.about">
+<div class="photo-wrap">
+<span class="handle" style="left:-4px;top:-4px"></span><span class="handle" style="right:-4px;top:-4px"></span><span class="handle" style="left:-4px;bottom:-4px"></span><span class="handle" style="right:-4px;bottom:-4px"></span>
+<div class="photo"><img src="data:image/jpeg;base64,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" alt="Portrait de Younes Chakrouni" width="350" height="450"></div>
+</div>
+<div class="about-copy">
+<div class="mono eyebrow" style="margin:0">Parcours</div>
+<h2>Du Maroc à <span class="hl">Brest.</span></h2>
+<p>Après un DUT Génie Informatique à l'EST Casablanca, j'ai rejoint le cycle ingénieur de l'ENIB. Mes stages m'ont fait passer du web au robot : une plateforme de contrôle temps réel chez ROBOTICA, puis la robotique éducative au CITT.</p>
+<div class="tl">
+<div class="tl-col">
+<div class="mono">Expériences</div>
+<div class="tl-item"><time>2025 · 6 mois</time><div><b>Stage de fin de DUT · ROBOTICA Maroc</b><span>Plateforme web robotique</span>
+<ul><li>Contrôle temps réel d'un robot PiCar Pro via Flask, HTML/CSS/JS</li><li>Raspberry Pi : capteurs, moteurs, sockets Python client-serveur</li><li>Scrum et gestion de versions avec Git</li></ul></div></div>
+<div class="tl-item"><time>2024 · 4 mois</time><div><b>Stage d'initiation · CITT</b><span>Robotique éducative et automatisation</span>
+<ul><li>Robots LEGO EV3 (Python, Scratch) avec reconnaissance vocale</li><li>Automatisation administrative en Excel VBA</li></ul></div></div>
+</div>
+<div class="tl-col">
+<div class="mono">Formation</div>
+<div class="tl-item"><time>2025 – 2028</time><div><b>Diplôme d'ingénieur généraliste</b><span>ENIB, École Nationale d'Ingénieurs de Brest · 2e année</span></div></div>
+<div class="tl-item"><time>2023 – 2025</time><div><b>DUT Génie Informatique</b><span>EST Casablanca</span></div></div>
+<div class="tl-item"><time>2022</time><div><b>Bac Sciences Physiques et Chimiques</b><span>Groupe Scolaire Majorelle · Mention Très Bien</span></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="wrap" id="competences">
+<div class="sec-head" data-build data-name="competences.head">
+<div class="mono eyebrow">Compétences</div>
+<h2>La boîte à <span class="hl">outils.</span></h2>
+</div>
+<div class="skills" data-build data-name="competences.grid">
+<div class="sk" style="--c:var(--a5)"><div class="mono">Développement &amp; BDD</div><h3>Langages et données</h3>
+<div class="chips"><span class="chip">Python</span><span class="chip">C</span><span class="chip">Java</span><span class="chip">PHP</span><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span><span class="chip">Flask</span><span class="chip">API REST</span><span class="chip">Sockets</span><span class="chip">pytest</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">SQLite</span></div></div>
+<div class="sk" style="--c:var(--a1)"><div class="mono">Réseaux &amp; embarqué</div><h3>Du bus au cloud</h3>
+<div class="chips"><span class="chip">TCP/IP</span><span class="chip">MQTT</span><span class="chip">Zigbee</span><span class="chip">CAN</span><span class="chip">UART</span><span class="chip">I2C</span><span class="chip">Raspberry Pi</span><span class="chip">STM32</span><span class="chip">FreeRTOS</span><span class="chip">ROS2</span><span class="chip">micro-ROS</span><span class="chip">LEGO EV3</span></div></div>
+<div class="sk" style="--c:var(--a3)"><div class="mono">DevOps &amp; outils</div><h3>Environnement</h3>
+<div class="chips"><span class="chip">Linux</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Docker (notions)</span><span class="chip">PowerShell</span><span class="chip">VirtualBox</span><span class="chip">VS Code</span><span class="chip">Jupyter</span></div></div>
+<div class="sk" style="--c:var(--a6)"><div class="mono">Méthodes</div><h3>Travail en équipe</h3>
+<div class="chips"><span class="chip">Agile Scrum</span><span class="chip">Diagramme de Gantt</span><span class="chip">Gestion de projet</span><span class="chip">Tests</span><span class="chip">Travail collaboratif</span></div></div>
+</div>
+<div class="extra" data-build data-name="competences.extra">
+<div class="sk" style="--c:var(--a4)"><div class="mono">Langues</div>
+<div class="lang"><div>Arabe <span>Maternelle</span></div><div>Français <span>Courant</span></div><div>Anglais <span>Intermédiaire</span></div></div></div>
+<div class="sk" style="--c:var(--a2)"><div class="mono">Certifications</div>
+<p>Développement en langage C · Développement web · Introduction to AI (SkillUp)</p></div>
+<div class="sk" style="--c:var(--a7)"><div class="mono">Centres d'intérêt</div>
+<p>Développement logiciel, systèmes embarqués, robotique et IoT.</p></div>
+</div>
+</section>
+<section class="wrap contact" id="contact">
+<div class="card-c" data-build data-name="contact.card">
+<div class="mono eyebrow" style="margin:0">Stage · 6 mois · dès fin février 2027</div>
+<h2>Parlons de votre <span class="hl">projet.</span></h2>
+<p>Je cherche un stage en développement logiciel, systèmes embarqués ou robotique. Je suis basé à Brest et mobile dans toute la France.</p>
+<div class="copyrow"><span class="field" id="mail">youness.chakrouni@gmail.com</span><button class="btn btn-fill" id="copy" type="button">Copier l'email</button></div>
+<div class="contact-meta"><span>Téléphone <b>+33 7 45 57 44 47</b></span><a id="li" href="#" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap foot">
+<div><a class="logo" href="#top"><span class="logo-mark">YC</span><span>YOUNES CHAKROUNI</span></a>
+<p>Élève ingénieur à l'ENIB. Logiciel, systèmes embarqués et robotique.</p></div>
+<div><h4>Navigation</h4><ul><li><a href="#domaines">Domaines</a></li><li><a href="#projets">Projets</a></li><li><a href="#parcours">Parcours</a></li><li><a href="#competences">Compétences</a></li></ul></div>
+<div><h4>Domaines</h4><ul><li><a href="#domaines">Embarqué</a></li><li><a href="#domaines">Robotique</a></li><li><a href="#domaines">Logiciel &amp; web</a></li></ul></div>
+<div><h4>Contact</h4><ul><li><a href="#contact">Email</a></li><li><a id="li2" href="#" target="_blank" rel="noopener">LinkedIn</a></li><li><span style="color:var(--muted)">Brest, France</span></li></ul></div>
+</div>
+<div class="legal"><span>© 2026 Younes Chakrouni</span><span>Brest, France</span></div>
+<div class="giant" id="giant" aria-hidden="true">CHAKROUNI</div>
+</footer>
+<dialog id="modal" aria-labelledby="m-title">
+<button class="m-close" id="m-close" type="button" aria-label="Fermer">✕</button>
+<div class="m-in" id="m-body"></div>
+</dialog>
+<button id="skip" type="button" hidden>Passer l'intro →</button>
+<script>
+/* ===== Réglages faciles à modifier ===== */
+const CONFIG = {
+linkedin: "https://www.linkedin.com/search/results/people/?keywords=Younes%20Chakrouni", // remplace par l'URL de ton profil
+agents: ["Layout","Typo","Hero","Grid","Motion","Copy","QA","STM32","ROS2","I2C","CAN","Flask","pytest","FreeRTOS","UART","Zigbee","SQL","Git"],
+colors: ["#ff5c39","#ff4fa3","#39d0ff","#4ade80","#facc15","#a78bfa","#60a5fa"],
+introStagger: 420,   // ms entre deux blocs pendant l'intro
+buildTime: 1200      // ms entre le wireframe et le contenu
+};
+document.getElementById('li').href = CONFIG.linkedin;
+document.getElementById('li2').href = CONFIG.linkedin;
+/* ===== Projets : détail ===== */
+const PROJECTS = {
+bma:{tag:"ENIB · Systèmes embarqués",title:"Supervision d'accélération BMA400",
+text:"Chaîne complète de mesure, du capteur jusqu'à l'interface de supervision.",
+items:["Lecture de l'accéléromètre BMA400 en I2C par une carte STM32, programmée en C","Transmission des mesures en UART ou en Zigbee","Application Python temps réel : interface PyQt5, stockage SQLite, API REST Flask","Simulateur de capteur pour développer sans matériel"],
+figs:[["42","tests pytest"],["3","axes mesurés"],["2","liaisons : UART, Zigbee"]],
+chips:["C","STM32","I2C","UART","Zigbee","Python","PyQt5","SQLite","Flask","pytest"]},
+ros:{tag:"ENIB · Robotique",title:"Robot mobile ROS2 / micro-ROS",
+text:"Architecture distribuée sur trois machines qui communiquent en ROS2.",
+items:["PC Linux, Raspberry Pi et STM32 reliés dans un même graphe ROS2","micro-ROS sous FreeRTOS côté microcontrôleur","Acquisition de la vitesse toutes les 5 ms","Asservissement de vitesse par correcteur PI"],
+figs:[["5 ms","période d'acquisition"],["3","machines"],["PI","correcteur"]],
+chips:["ROS2","micro-ROS","FreeRTOS","STM32","Raspberry Pi","Linux","C"]},
+voice:{tag:"Projet de fin de DUT",title:"Robot à commande vocale",
+text:"Un robot qui comprend des ordres donnés en darija et se déplace seul.",
+items:["Reconnaissance de commandes vocales en darija (arabe marocain)","Navigation autonome sous ROS2 avec un LiDAR","Mise au point en simulation dans Gazebo avant les essais réels"],
+figs:[["Darija","langue des commandes"],["LiDAR","perception"]],
+chips:["ROS2","LiDAR","Gazebo","Python","Reconnaissance vocale"]},
+can:{tag:"ENIB · Réseaux embarqués",title:"Réseau de capteurs STM32 sur bus CAN",
+text:"Plusieurs cartes STM32 partagent les mesures de leurs centrales inertielles sur un bus CAN.",
+items:["Pilotage de centrales inertielles MPU9250 en C","Bus CAN configuré à 500 kbit/s entre les cartes","Réception et décodage des trames en Python"],
+figs:[["500","kbit/s"],["MPU9250","capteur 9 axes"]],
+chips:["C","STM32","CAN","MPU9250","Python"]},
+sql:{tag:"ENIB · Bases de données",title:"Base de données d'un réseau social",
+text:"Modélisation et logique métier directement dans la base.",
+items:["Schéma SQLite avec triggers, vues et index","21 tests pytest sur le comportement de la base","Les tests ont révélé un bug de compteur, corrigé ensuite"],
+figs:[["21","tests pytest"],["1","bug corrigé"]],
+chips:["SQLite","SQL","Triggers","Vues","Index","pytest"]},
+net:{tag:"DUT · Réseaux et systèmes",title:"Infrastructure réseau",
+text:"Trois déploiements d'infrastructure réalisés pendant le DUT.",
+items:["Déploiement de postes Windows par WDS et démarrage PXE","Serveur FTP sécurisé en TLS","Mise en place d'un cluster Oracle RAC"],
+figs:[["PXE","boot réseau"],["TLS","FTP sécurisé"],["RAC","cluster Oracle"]],
+chips:["Windows Server","WDS","PXE","FTP/TLS","Oracle RAC","Linux"]},
+space:{tag:"Hackathon",title:"Act In Space · 3e place",
+text:"Hackathon consacré aux applications du spatial, sur le thème de la cybersécurité des satellites.",
+items:["Travail en équipe sur un temps limité","Sujet : sécuriser les satellites et leurs communications","Projet classé 3e"],
+figs:[["3e","place"]],
+chips:["Cybersécurité","Satellites","Travail d'équipe"]}
+};
+const modal = document.getElementById('modal'), mBody = document.getElementById('m-body');
+document.querySelectorAll('.proj').forEach(b => b.addEventListener('click', () => {
+const p = PROJECTS[b.dataset.p];
+mBody.innerHTML = `<div class="mono">${p.tag}</div><h3 id="m-title">${p.title}</h3><p>${p.text}</p>
+<div class="figs">${p.figs.map(f=>`<div class="fig"><b>${f[0]}</b><span>${f[1]}</span></div>`).join('')}</div>
+<ul>${p.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+<div class="chips">${p.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`;
+if (modal.showModal) modal.showModal(); else modal.setAttribute('open','');
+}));
+document.getElementById('m-close').onclick = () => modal.close();
+modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+/* ===== Copier l'email ===== */
+document.getElementById('copy').addEventListener('click', e => {
+const t = document.getElementById('mail').textContent, btn = e.currentTarget;
+const done = ok => { btn.textContent = ok ? "Copié ✓" : "Sélectionné, Ctrl+C"; setTimeout(()=>btn.textContent="Copier l'email",2000); };
+const sel = () => { const r=document.createRange(); r.selectNodeContents(document.getElementById('mail')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); done(false); };
+try { navigator.clipboard.writeText(t).then(()=>done(true), sel); } catch(_) { sel(); }
+});
+/* ===== Visuels : courbe d'accélération + paquets ===== */
+(function(){
+const W=1200,H=190, axes=[["#ff5c39",0.9,0],["#39d0ff",1.6,1.3],["#facc15",2.3,2.4]];
+let s=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">`;
+for (let g=1; g<4; g++) s+=`<line x1="0" x2="${W}" y1="${g*H/4}" y2="${g*H/4}" stroke="#241b18"/>`;
+axes.forEach(([c,f,ph],k)=>{ let d=""; for(let x=0;x<=W;x+=6){ const t=x/W*Math.PI*2*4; // la moitié du tracé = 4π : la boucle est parfaite
+const y=H/2+(k-1)*18+Math.sin(t*(k+1))*22*Math.cos(t*0.5+ph)+Math.sin(t*(k+2)+ph)*8; d+=(x?"L":"M")+x+" "+y.toFixed(1); }
+s+=`<path d="${d}" fill="none" stroke="${c}" stroke-width="1.6" opacity=".9"/>`; });
+document.getElementById('wave').innerHTML = s+"</svg>";
+const n=document.getElementById('nodes');
+const place=()=>{ n.querySelectorAll('.link,.pkt').forEach(e=>e.remove()); const ns=[...n.querySelectorAll('.node')], r0=n.getBoundingClientRect();
+for(let i=0;i<ns.length-1;i++){ const a=ns[i].getBoundingClientRect(), b=ns[i+1].getBoundingClientRect(); const x0=a.right-r0.left, x1=b.left-r0.left;
+const l=document.createElement('i'); l.className='link'; l.style.left=x0+'px'; l.style.width=(x1-x0)+'px'; n.appendChild(l);
+[0,-.7].forEach((d,j)=>{ const p=document.createElement('i'); p.className='pkt'; p.style.setProperty('--x0',x0+'px'); p.style.setProperty('--x1',(x1-6)+'px'); p.style.animationDelay=(d-i*.3)+'s';
+if((i+j)%2) { p.style.setProperty('--x0',(x1-6)+'px'); p.style.setProperty('--x1',x0+'px'); p.style.background='var(--a1)'; p.style.boxShadow='0 0 10px var(--a1)'; } n.appendChild(p); }); } };
+place(); addEventListener('resize', place);
+})();
+/* ===== Packs 3D : inclinaison à la souris ===== */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function(){
+if (reduced) return;
+const st=document.getElementById('stage'), inn=document.getElementById('stage-in');
+st.addEventListener('pointermove', e=>{ const r=st.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+inn.style.transform=`rotateY(${x*14}deg) rotateX(${-y*10}deg)`; });
+st.addEventListener('pointerleave', ()=> inn.style.transform='');
+})();
+/* ===== Agents IA : curseurs ===== */
+const agentsLayer=document.getElementById('agents'), wires=document.getElementById('wires');
+const AG = CONFIG.agents.map((name,i)=>{
+const c=CONFIG.colors[i%CONFIG.colors.length], el=document.createElement('div'); el.className='agent'; el.style.opacity=0;
+el.innerHTML=`<svg width="16" height="20" viewBox="0 0 16 20"><path d="M1 1 L1 16 L5 12.5 L8 19 L10.6 17.8 L7.7 11.5 L13 11.5 Z" fill="${c}" stroke="#0b0807" stroke-width="1.2" stroke-linejoin="round"/></svg><span style="background:${c}">${name}</span>`;
+agentsLayer.appendChild(el);
+return {el,c,name,x:0,y:0,vx:0,vy:0,tx:0,ty:0,on:false,seed:Math.random()*100};
+});
+let rafOn=false;
+function tick(t){
+let any=false;
+for (const a of AG){ if(!a.on) continue; any=true;
+const wob=6, nx=a.tx+Math.sin(t/430+a.seed)*wob, ny=a.ty+Math.cos(t/510+a.seed)*wob;
+a.vx+=(nx-a.x)*.045; a.vy+=(ny-a.y)*.045; a.vx*=.8; a.vy*=.8; a.x+=a.vx; a.y+=a.vy;
+a.el.style.transform=`translate(${a.x-scrollX}px,${a.y-scrollY}px)`; }
+if (any) requestAnimationFrame(tick); else rafOn=false;
+}
+function wake(){ if(!rafOn){ rafOn=true; requestAnimationFrame(tick); } }
+function spawn(a,x,y){ a.x=a.tx=x; a.y=a.ty=y; a.vx=(Math.random()-.5)*40; a.vy=(Math.random()-.5)*40; a.on=true; a.el.style.opacity=1; wake(); }
+function exitAgent(a){ const ang=Math.random()*Math.PI*2, R=Math.max(innerWidth,innerHeight);
+a.tx=scrollX+innerWidth/2+Math.cos(ang)*R; a.ty=scrollY+innerHeight/2+Math.sin(ang)*R; a.el.style.opacity=0;
+setTimeout(()=>{ if(a.el.style.opacity==='0') a.on=false; },900); }
+function edgePoint(){ const side=Math.random()<.5?-60:innerWidth+60; return [scrollX+side, scrollY+innerHeight*(0.2+Math.random()*.6)]; }
+/* ===== Construction d'un bloc ===== */
+const NS='http://www.w3.org/2000/svg';
+function svgEl(tag,attrs){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
+function docRect(el){ const r=el.getBoundingClientRect(); return {x:r.left+scrollX,y:r.top+scrollY,w:r.width,h:r.height}; }
+function sizeWires(){ wires.style.height=document.documentElement.scrollHeight+'px'; }
+function build(block, team, quick){
+if (block._built) return; block._built=true; block._building=true;
+sizeWires();
+const B=docRect(block), docW=document.documentElement.clientWidth;
+const svg=svgEl('svg',{width:B.w,height:B.h}); svg.style.left=B.x+'px'; svg.style.top=B.y+'px';
+const parts=[...block.children].filter(c=>c.getBoundingClientRect().width>0);
+const pts=[];
+const col=i=>team[i%team.length].c;
+// guides horizontaux sur toute la largeur
+[0,B.h].forEach((y,i)=> svg.appendChild(svgEl('line',{class:'guide',x1:-B.x,x2:docW-B.x,y1:y,y2:y,stroke:col(i),pathLength:1})));
+// cadre du bloc + étiquette
+svg.appendChild(svgEl('rect',{class:'rect',x:0,y:0,width:B.w,height:B.h,stroke:col(0),pathLength:1,opacity:.6}));
+const lab=svgEl('text',{x:4,y:-6,fill:col(0)}); lab.textContent=`${block.dataset.name||'block'} · ${Math.round(B.w)}×${Math.round(B.h)}`; svg.appendChild(lab);
+parts.forEach((p,i)=>{ const r=docRect(p), x=r.x-B.x, y=r.y-B.y, c=col(i+1);
+svg.appendChild(svgEl('rect',{class:'rect',x,y,width:r.w,height:r.h,stroke:c,pathLength:1,rx:3}));
+if (r.h>70 && r.w>70 && i%2===0){ svg.appendChild(svgEl('line',{class:'xbox',x1:x,y1:y,x2:x+r.w,y2:y+r.h,stroke:c})); svg.appendChild(svgEl('line',{class:'xbox',x1:x+r.w,y1:y,x2:x,y2:y+r.h,stroke:c})); }
+[[x,y],[x+r.w,y],[x,y+r.h],[x+r.w,y+r.h]].forEach(([hx,hy])=> svg.appendChild(svgEl('rect',{class:'hdl',x:hx-2.5,y:hy-2.5,width:5,height:5,fill:c})));
+pts.push([r.x,r.y],[r.x+r.w,r.y],[r.x+r.w,r.y+r.h],[r.x+r.w*.5,r.y+r.h*.5]);
+});
+if (!pts.length) pts.push([B.x,B.y],[B.x+B.w,B.y+B.h]);
+wires.appendChild(svg);
+requestAnimationFrame(()=>requestAnimationFrame(()=>svg.classList.add('go')));
+// les agents parcourent les coins des cadres
+const T=quick?CONFIG.buildTime*.8:CONFIG.buildTime, steps=4;
+team.forEach((a,k)=>{ for(let s=0;s<steps;s++) setTimeout(()=>{ const p=pts[(k*3+s*5)%pts.length]; a.tx=p[0]+(Math.random()-.5)*20; a.ty=p[1]+(Math.random()-.5)*14; }, s*T/steps); });
+setTimeout(()=>{ [...block.children].forEach((c,i)=>c.style.transitionDelay=(i*70)+'ms'); block.classList.remove('is-wire'); block.dispatchEvent(new CustomEvent('built')); }, T*.8);
+setTimeout(()=>{ svg.classList.add('fade'); block._building=false; }, T*1.25);
+setTimeout(()=>{ svg.remove(); [...block.children].forEach(c=>c.style.transitionDelay=''); }, T*1.25+700);
+}
+function revealAll(){ document.querySelectorAll('[data-build]').forEach(b=>{ b.classList.remove('is-wire'); b._built=true; });
+wires.querySelectorAll('svg').forEach(s=>s.remove()); AG.forEach(a=>{ if(a.on) exitAgent(a); }); }
+/* ===== Intro + construction au scroll ===== */
+const blocks=[...document.querySelectorAll('[data-build]')];
+const headless = navigator.webdriver === true;  // capture de vignette : page complète, sans intro
+const badgeT=document.getElementById('badge-t'), seed=document.getElementById('seed'), skip=document.getElementById('skip');
+const timers=[]; const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
+function finishIntro(){ timers.forEach(clearTimeout); const bt=document.getElementById('boot'); if(bt) bt.remove(); revealAll(); seed.classList.remove('on'); skip.hidden=true;
+badgeT.textContent='Disponible · stage 2027'; }
+function runIntro(){
+const first=blocks.filter(b=>b.getBoundingClientRect().top<innerHeight);
+first.forEach(b=>b.classList.add('is-wire'));
+skip.hidden=false; skip.onclick=finishIntro;
+const boot=document.getElementById('boot');
+const lines=['<span class="p">&gt;</span> boot portfolio --user younes.chakrouni','<span class="p">&gt;</span> load cv.pdf ........ <span class="ok">ok</span>','<span class="p">&gt;</span> parse 6 projets, 2 stages ... <span class="ok">ok</span>','<span class="p">&gt;</span> spawn agents --count 18'];
+lines.forEach((l,i)=>later(()=>{ boot.insertAdjacentHTML('beforeend','<div>'+l+'</div>'); },60+i*230));
+later(()=>{ boot.style.opacity=0; seed.classList.add('on'); },1050);
+later(()=>boot.remove(),1500);
+let n=0; badgeT.textContent='0 agents live';
+later(()=>{ seed.classList.remove('on'); const sh=document.createElement('div'); sh.className='shock'; document.body.appendChild(sh); setTimeout(()=>sh.remove(),1100); const cx=scrollX+innerWidth/2, cy=scrollY+innerHeight/2;
+AG.forEach((a,i)=>later(()=>{ spawn(a,cx,cy); a.tx=cx+(Math.random()-.5)*innerWidth*.7; a.ty=cy+(Math.random()-.5)*innerHeight*.6; badgeT.textContent=(++n)+' agents live'; }, i*35)); }, 1550);
+const per=Math.max(3,Math.ceil(AG.length/first.length));
+first.forEach((b,i)=> later(()=>build(b, AG.slice((i*per)%AG.length).concat(AG).slice(0,per), false), 2200+i*CONFIG.introStagger));
+const end=2200+first.length*CONFIG.introStagger+CONFIG.buildTime*1.3;
+later(()=>{ AG.forEach(exitAgent); badgeT.textContent='Disponible · stage 2027'; skip.hidden=true; }, end);
+later(revealAll, end+3000); // filet de sécurité
+}
+function watchScroll(){
+const pre=new IntersectionObserver(es=>es.forEach(e=>{ const b=e.target; if(e.isIntersecting && !b._built && e.boundingClientRect.top>innerHeight*.9){ b.classList.add('is-wire'); setTimeout(()=>{ if(!b._built){ b.classList.remove('is-wire'); b._built=true; } },5000); } }),{rootMargin:'0px 0px 40% 0px'});
+const go=new IntersectionObserver(es=>es.forEach(e=>{ const b=e.target; if(e.isIntersecting && !b._built){ b.classList.add('is-wire');
+const team=[...AG].sort(()=>Math.random()-.5).slice(0,3); team.forEach(a=>{ if(!a.on){ const [x,y]=edgePoint(); spawn(a,x,y);} else a.el.style.opacity=1; });
+build(b,team,true); setTimeout(()=>team.forEach(exitAgent), CONFIG.buildTime*1.1); go.unobserve(b); pre.unobserve(b); } }),{threshold:.18});
+blocks.forEach(b=>{ if(!b._built){ pre.observe(b); go.observe(b); } });
+}
+if (reduced || headless){ badgeT.textContent='Disponible · stage 2027'; }
+else {
+const start=()=>{ if(scrollY<40) runIntro(); watchScroll(); };
+const fontsReady = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1200))]) : Promise.resolve();
+fontsReady.then(start);
+}
+/* ================= V2 : couche dynamique ================= */
+const fine = matchMedia('(pointer:fine)').matches;
+/* --- découpe des grands titres en lettres --- */
+function splitChars(root){
+let i=0;
+const walk=node=>{ [...node.childNodes].forEach(c=>{
+if(c.nodeType===3){ const frag=document.createDocumentFragment();
+c.textContent.split(/(\s+)/).forEach(part=>{ if(!part) return; if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+const w=document.createElement('span'); w.className='w';
+[...part].forEach(ch=>{ const s=document.createElement('span'); s.className='ch'; s.style.setProperty('--i',i++); s.textContent=ch; w.appendChild(s); });
+frag.appendChild(w); });
+c.replaceWith(frag);
+} else if(c.nodeType===1) walk(c); }); };
+walk(root);
+}
+document.querySelectorAll('h1,h2').forEach(splitChars);
+const play=el=>{ el.classList.remove('play'); void el.offsetWidth; el.classList.add('play'); };
+/* --- texte qui se décode --- */
+const GLYPHS='01<>/#_*+=ABCDEF▪';
+function scramble(el,to,dur=700){
+const from=el.textContent, len=Math.max(from.length,to.length), t0=performance.now();
+const step=t=>{ const p=Math.min(1,(t-t0)/dur); let out='';
+for(let k=0;k<len;k++){ const r=k/len; out+= p>r+.15 ? (to[k]||'') : p>r ? GLYPHS[(Math.random()*GLYPHS.length)|0] : (from[k]||''); }
+el.textContent=out; if(p<1) requestAnimationFrame(step); else el.textContent=to; };
+requestAnimationFrame(step);
+}
+if(!reduced){
+const words=['des robots autonomes','du firmware STM32','des API temps réel','des réseaux de capteurs','des interfaces PyQt5','des bases SQL testées'];
+let wi=0; const rot=document.getElementById('rot');
+setInterval(()=>{ wi=(wi+1)%words.length; scramble(rot,words[wi]); },2600);
+}
+/* --- réactions quand un bloc est construit --- */
+function countUp(el){ const to=+el.dataset.to, t0=performance.now(), d=1300;
+const f=t=>{ const p=Math.min(1,(t-t0)/d), e=1-Math.pow(1-p,4); el.textContent=Math.round(to*e); if(p<1) requestAnimationFrame(f); };
+requestAnimationFrame(f); }
+blocks.forEach(b=>b.addEventListener('built',()=>{
+b.querySelectorAll('h1,h2').forEach(play);
+b.querySelectorAll('.eyebrow').forEach(e=>scramble(e,e.textContent,600));
+b.querySelectorAll('.num').forEach(countUp);
+}));
+/* --- circuit imprimé animé derrière le hero --- */
+(function(){
+const cv=document.getElementById('pcb'), ctx=cv.getContext('2d'), hero=document.getElementById('hero');
+let W=0,H=0,dpr=1,traces=[],pulses=[],base,bright,mx=-999,my=-999,run=true;
+const G=26, cols=['#ff4a1c','#ff4a1c','#ff4a1c','#39d0ff','#facc15'];
+function gen(){
+dpr=Math.min(2,devicePixelRatio||1); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*dpr; cv.height=H*dpr;
+traces=[]; const n=Math.round(W*H/7000), D=[[1,0],[0,1],[-1,0],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+for(let t=0;t<n;t++){ let x=Math.round(Math.random()*W/G)*G, y=Math.round(Math.random()*H/G)*G, d=D[(Math.random()*4)|0]; const pts=[[x,y]];
+const segs=3+((Math.random()*6)|0);
+for(let s=0;s<segs;s++){ const L=G*(1+((Math.random()*4)|0)); x+=d[0]*L; y+=d[1]*L; pts.push([x,y]);
+const turn=Math.random(); if(turn<.45){ const opts=D.filter(o=>o[0]*d[0]+o[1]*d[1]>0 && (o[0]!==d[0]||o[1]!==d[1])); d=opts[(Math.random()*opts.length)|0]||d; } }
+let len=0; const seg=[]; for(let k=1;k<pts.length;k++){ const l=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]); seg.push(l); len+=l; }
+traces.push({pts,seg,len,c:cols[(Math.random()*cols.length)|0]}); }
+const mk=(alpha,wid)=>{ const o=document.createElement('canvas'); o.width=cv.width; o.height=cv.height; const c=o.getContext('2d'); c.scale(dpr,dpr); c.lineCap='round'; c.lineJoin='round';
+traces.forEach(tr=>{ c.strokeStyle=tr.c; c.globalAlpha=alpha; c.lineWidth=wid; c.beginPath(); tr.pts.forEach((p,k)=>k?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1])); c.stroke();
+const e=tr.pts[tr.pts.length-1], s0=tr.pts[0]; c.globalAlpha=alpha*1.6; [s0,e].forEach(p=>{ c.beginPath(); c.arc(p[0],p[1],3,0,7); c.stroke(); }); });
+return o; };
+base=mk(.09,1.1); bright=mk(.75,1.4); pulses=[];
+}
+function at(tr,d){ let k=0; while(k<tr.seg.length-1 && d>tr.seg[k]){ d-=tr.seg[k]; k++; } const a=tr.pts[k], b=tr.pts[k+1], f=Math.min(1,d/tr.seg[k]); return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f]; }
+function addPulse(tr){ pulses.push({tr,d:0,v:1.6+Math.random()*2.6}); }
+function frame(){
+if(!run) return;
+ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height); ctx.drawImage(base,0,0);
+if(mx>-500){ ctx.save(); ctx.beginPath(); ctx.arc(mx*dpr,my*dpr,190*dpr,0,7); ctx.clip(); ctx.globalAlpha=.35; ctx.drawImage(bright,0,0);
+ctx.beginPath(); ctx.arc(mx*dpr,my*dpr,110*dpr,0,7); ctx.clip(); ctx.globalAlpha=.65; ctx.drawImage(bright,0,0); ctx.restore(); }
+ctx.setTransform(dpr,0,0,dpr,0,0);
+if(pulses.length<34 && Math.random()<.5) addPulse(traces[(Math.random()*traces.length)|0]);
+pulses=pulses.filter(p=>p.d<p.tr.len);
+pulses.forEach(p=>{ p.d+=p.v; for(let k=6;k>=0;k--){ const q=at(p.tr,Math.max(0,p.d-k*5)); ctx.globalAlpha=(1-k/7)*.9; ctx.fillStyle=p.tr.c; ctx.beginPath(); ctx.arc(q[0],q[1],k?1.6:2.4,0,7); ctx.fill(); }
+const h=at(p.tr,p.d); ctx.globalAlpha=.25; ctx.beginPath(); ctx.arc(h[0],h[1],9,0,7); ctx.fill(); });
+ctx.globalAlpha=1; requestAnimationFrame(frame);
+}
+gen(); let rt; addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(gen,200); });
+if(reduced){ ctx.drawImage(base,0,0); return; }
+hero.addEventListener('pointermove',e=>{ const r=cv.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; });
+hero.addEventListener('pointerleave',()=>{ mx=my=-999; });
+hero.addEventListener('pointerdown',e=>{ const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+traces.filter(t=>t.pts.some(p=>Math.hypot(p[0]-x,p[1]-y)<160)).slice(0,14).forEach(addPulse); });
+new IntersectionObserver(es=>{ const v=es[0].isIntersecting; if(v&&!run){ run=true; requestAnimationFrame(frame);} run=v; }).observe(hero);
+requestAnimationFrame(frame);
+})();
+/* --- bandeau défilant (accélère avec le scroll) --- */
+(function(){
+const rows=[...document.querySelectorAll('.mq')]; if(!rows.length) return;
+rows.forEach(r=>{ r.innerHTML+=r.innerHTML; r.innerHTML+=r.innerHTML; r._x=0; });
+if(reduced) return;
+let lastY=scrollY, boost=0;
+const f=()=>{ const dy=scrollY-lastY; lastY=scrollY; boost+= (Math.min(40,Math.abs(dy))*.25-boost)*.12;
+rows.forEach(r=>{ const sp=+r.dataset.speed, half=r.scrollWidth/2; r._x-= sp*(1+boost);
+if(r._x<=-half) r._x+=half; if(r._x>0) r._x-=half; r.style.transform=`translateX(${r._x}px)`; });
+requestAnimationFrame(f); };
+requestAnimationFrame(f);
+})();
+/* --- scroll : progression + parallaxe des packs --- */
+(function(){
+const prog=document.getElementById('prog'), stage=document.getElementById('stage'), hero=document.getElementById('hero');
+const on=()=>{ const max=document.documentElement.scrollHeight-innerHeight; prog.style.transform=`scaleX(${max>0?scrollY/max:0})`;
+if(!reduced) stage.style.setProperty('--sp',Math.min(1,Math.max(0,scrollY/(hero.offsetHeight*.9))).toFixed(3)); };
+addEventListener('scroll',on,{passive:true}); on();
+})();
+/* --- cartes : projecteur + inclinaison 3D, boutons magnétiques --- */
+if(fine && !reduced){
+document.querySelectorAll('.dom,.proj,.sk,.tl-col').forEach(c=>{
+const tilt=c.matches('.dom,.proj');
+c.addEventListener('pointermove',e=>{ const r=c.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+c.style.setProperty('--mx',x+'px'); c.style.setProperty('--my',y+'px');
+if(tilt){ c.style.transition='transform .12s ease-out,border-color .3s'; c.style.transform=`perspective(900px) rotateX(${(.5-y/r.height)*7}deg) rotateY(${(x/r.width-.5)*9}deg) translateY(-4px)`; } });
+c.addEventListener('pointerleave',()=>{ c.style.removeProperty('--mx'); c.style.removeProperty('--my'); if(tilt){ c.style.transition=''; c.style.transform=''; } });
+});
+document.querySelectorAll('.btn').forEach(b=>{
+b.addEventListener('pointermove',e=>{ const r=b.getBoundingClientRect(); b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.4}px)`; });
+b.addEventListener('pointerleave',()=>b.style.transform='');
+});
+}
+/* --- curseur personnalisé --- */
+(function(){
+if(!fine || reduced) return;
+const cur=document.getElementById('cur'), dot=document.getElementById('cdot'); let x=-100,y=-100,cx=-100,cy=-100;
+addEventListener('pointermove',e=>{ x=e.clientX; y=e.clientY; dot.style.transform=`translate(${x}px,${y}px)`;
+const t=e.target.closest ? e.target : null;
+cur.classList.toggle('view', !!(t && t.closest('.proj')));
+cur.classList.toggle('big', !!(t && !t.closest('.proj') && t.closest('a,button,.dom,.sk,.field')));
+});
+const f=()=>{ cx+=(x-cx)*.18; cy+=(y-cy)*.18; cur.style.transform=`translate(${cx}px,${cy}px)`; requestAnimationFrame(f); }; f();
+})();
+/* --- nom géant du footer éclairé par la souris --- */
+(function(){
+const g=document.getElementById('giant');
+addEventListener('pointermove',e=>{ const r=g.getBoundingClientRect(); if(e.clientY<r.top-300) return;
+g.style.setProperty('--gx',(e.clientX-r.left)+'px'); g.style.setProperty('--gy',(e.clientY-r.top)+'px'); },{passive:true});
+})();
+</script>
